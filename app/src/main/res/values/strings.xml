@@ -18,4 +18,17 @@
     <string name="text_voting_locations">Voting Locations</string>
     <string name="text_ballot_information">Ballot Information</string>
 
+    <!-- representative fragment-->
+    <string name="header_representative_search">Representative Search</string>
+    <string name="edit_address_line_1">Address Line 1</string>
+    <string name="edit_address_line_2">Address Line 2</string>
+    <string name="edit_city">City</string>
+    <string name="edit_zip">Zip</string>
+    <string name="btn_find_my_representative">Find My Representative</string>
+    <string name="btn_use_my_location">Use My Location</string>
+    <string name="header_my_representatives">My Representatives</string>
+    <string name="snackbar_error_require_location_permission">To get representatives by using location, you need to enable location permission</string>
+    <string name="text_api_status_loading">Loading</string>
+    <string name="text_api_status_error">Error when retrieving representatives</string>
+
 </resources>
