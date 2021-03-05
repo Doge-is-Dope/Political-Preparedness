@@ -7,14 +7,20 @@ import androidx.lifecycle.viewModelScope
 import com.example.android.politicalpreparedness.database.ElectionDao
 import com.example.android.politicalpreparedness.network.CivicsApiService
 import com.example.android.politicalpreparedness.network.models.Election
+import com.example.android.politicalpreparedness.utils.CivicsApiStatus
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import kotlin.collections.ArrayList
 
 class ElectionsViewModel(private val database: ElectionDao, private val apiService: CivicsApiService) : ViewModel() {
 
     private val _apiStatus = MutableLiveData<CivicsApiStatus>()
     val apiStatus: LiveData<CivicsApiStatus>
         get() = _apiStatus
+
+    private val _isDbLoading = MutableLiveData<Boolean>()
+    val isDbLoading: LiveData<Boolean>
+        get() = _isDbLoading
 
     private val _upComingElections = MutableLiveData<List<Election>>()
     val upcomingElections: LiveData<List<Election>>
@@ -24,9 +30,9 @@ class ElectionsViewModel(private val database: ElectionDao, private val apiServi
     val savedElections: LiveData<List<Election>>
         get() = _savedElections
 
-    private val _navigateToElectionDetails = MutableLiveData<Election>()
-    val navigateToElectionDetails: LiveData<Election>
-        get() = _navigateToElectionDetails
+    private val _navigateToVoterInfo = MutableLiveData<Election>()
+    val navigateToVoterInfo: LiveData<Election>
+        get() = _navigateToVoterInfo
 
 
     init {
@@ -52,26 +58,30 @@ class ElectionsViewModel(private val database: ElectionDao, private val apiServi
     }
 
     private fun getSavedElectionsFromDatabase() {
+        _isDbLoading.value = true
         viewModelScope.launch {
             _savedElections.value = database.getElections()
+            _isDbLoading.value = false
         }
     }
 
 
     /**
-     * When the election is clicked, set the [_navigateToElectionDetails]
+     * When the election is clicked, set the [_navigateToVoterInfo]
      * @param election The [Election] that was clicked on.
      */
-    fun displayElectionDetails(election: Election) {
-        _navigateToElectionDetails.value = election
+    fun displayVoterInfo(election: Election) {
+        _navigateToVoterInfo.value = election
     }
 
     /**
-     * After the navigation has taken place, set [_navigateToElectionDetails] to null
+     * After the navigation has taken place, set [_navigateToVoterInfo] to null
      */
-    fun displayElectionDetailsComplete() {
-        _navigateToElectionDetails.value = null
+    fun displayVoterInfoComplete() {
+        _navigateToVoterInfo.value = null
+    }
+
+    fun refresh(){
+        getSavedElectionsFromDatabase()
     }
 }
-
-enum class CivicsApiStatus { LOADING, ERROR, DONE }

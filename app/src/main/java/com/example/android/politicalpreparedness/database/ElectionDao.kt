@@ -9,11 +9,11 @@ interface ElectionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertElection(election: Election)
 
-    @Query("SELECT * FROM election_table ORDER BY electionDay DESC")
+    @Query("SELECT * FROM election_table ORDER BY electionDay")
     suspend fun getElections(): List<Election>
 
     @Query("SELECT * FROM election_table WHERE id = :id")
-    fun getElection(id: Int): Election?
+    suspend fun getElection(id: Int): Election?
 
     @Delete
     suspend fun deleteElection(election: Election)

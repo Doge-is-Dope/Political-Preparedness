@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Political Preparedness</string>
-    <string name="upcoming_elections">upcoming elections</string>
-    <string name="find_my_representatives">find my representatives</string>
+
+    <!-- launch fragment -->
+    <string name="btn_upcoming_elections">upcoming elections</string>
+    <string name="btn_find_my_representatives">find my representatives</string>
     <string name="image_description_ballot_logo">A image of voting</string>
+
+    <!-- elections fragment -->
     <string name="header_upcoming">Upcoming Elections</string>
     <string name="header_saved">Saved Elections</string>
 
-    <!-- TODO: Add necessary string values -->
+    <!-- voter info fragment -->
+    <string name="btn_follow">follow election</string>
+    <string name="btn_unfollow">unfollow election</string>
+    <string name="header_election_information">Election Information</string>
+    <string name="text_voting_locations">Voting Locations</string>
+    <string name="text_ballot_information">Ballot Information</string>
 
 </resources>

@@ -1,14 +1,13 @@
 package com.example.android.politicalpreparedness.utils
 
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.politicalpreparedness.R
-import com.example.android.politicalpreparedness.election.CivicsApiStatus
 import com.example.android.politicalpreparedness.election.adapter.ElectionListAdapter
-import com.example.android.politicalpreparedness.network.jsonadapter.ElectionAdapter
 import com.example.android.politicalpreparedness.network.models.Election
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,7 +23,7 @@ fun RecyclerView.setElectionData(data: List<Election>?) {
 }
 
 @BindingAdapter("civicsApiStatus")
-fun bindStatus(statusImageView: ImageView, status: CivicsApiStatus?) {
+fun bindApiStatus(statusImageView: ImageView, status: CivicsApiStatus?) {
     when (status) {
         CivicsApiStatus.LOADING -> {
             statusImageView.visibility = View.VISIBLE
@@ -46,7 +45,14 @@ fun TextView.setElectionDay(date: Date?) {
     val calendar = Calendar.getInstance()
     date?.let {
         calendar.time = it
-        val dateFormat = SimpleDateFormat("YYYY-MM-dd", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         text = dateFormat.format(calendar.time)
+    }
+}
+
+@BindingAdapter("followOrUnfollow")
+fun Button.followOrUnfollow(hasSaved: Boolean?) {
+    hasSaved?.let {
+        text = if (it) resources.getString(R.string.btn_unfollow) else resources.getString(R.string.btn_follow)
     }
 }

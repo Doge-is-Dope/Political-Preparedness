@@ -25,39 +25,40 @@ class ElectionsFragment : Fragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        //TODO: Add ViewModel values and create ViewModel
-        //TODO: Add binding values
         val binding = FragmentElectionsBinding.inflate(inflater)
 
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.apply {
+            lifecycleOwner = viewLifecycleOwner
 
-        binding.electionsViewModel = viewModel
+            electionsViewModel = viewModel
 
-        binding.recyclerUpcoming.adapter = ElectionListAdapter(ElectionListener {
-            viewModel.displayElectionDetails(it)
-        })
+            recyclerUpcoming.adapter = ElectionListAdapter(ElectionListener {
+                viewModel.displayVoterInfo(it)
+            })
 
-        viewModel.navigateToElectionDetails.observe(viewLifecycleOwner, Observer {
+            recyclerSaved.adapter = ElectionListAdapter(ElectionListener {
+                viewModel.displayVoterInfo(it)
+            })
+        }
+
+        viewModel.navigateToVoterInfo.observe(viewLifecycleOwner, Observer {
             if (null != it) {
                 navigateToDetailFragment(it)
-                viewModel.displayElectionDetailsComplete()
+                viewModel.displayVoterInfoComplete()
             }
         })
 
-
-        //TODO: Link elections to voter info
-
-        //TODO: Initiate recycler adapters
-
-        //TODO: Populate recycler adapters
         return binding.root
 
     }
 
-    //TODO: Refresh adapters when fragment loads
+    override fun onResume() {
+        super.onResume()
+        viewModel.refresh()
+    }
 
     private fun navigateToDetailFragment(election: Election) {
-        this.findNavController().navigate(ElectionsFragmentDirections.actionElectionsFragmentToElectionDetailFragment(election.id, election.division))
+        this.findNavController().navigate(ElectionsFragmentDirections.actionElectionsFragmentToVoterInfoFragment(election.id, election.division))
     }
 
 }
