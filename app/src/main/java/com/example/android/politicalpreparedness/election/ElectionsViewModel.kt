@@ -8,7 +8,7 @@ import com.example.android.politicalpreparedness.database.ElectionDao
 import com.example.android.politicalpreparedness.network.CivicsApiService
 import com.example.android.politicalpreparedness.network.models.Election
 import kotlinx.coroutines.launch
-import java.lang.Exception
+import timber.log.Timber
 
 class ElectionsViewModel(private val database: ElectionDao, private val apiService: CivicsApiService) : ViewModel() {
 
@@ -44,6 +44,7 @@ class ElectionsViewModel(private val database: ElectionDao, private val apiServi
                 _upComingElections.value = response.elections
 
             } catch (e: Exception) {
+                Timber.e("Error: %s", e.localizedMessage)
                 _apiStatus.value = CivicsApiStatus.ERROR
                 _upComingElections.value = ArrayList()
             }

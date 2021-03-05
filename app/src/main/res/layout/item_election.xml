@@ -17,8 +17,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/default_margin"
-        android:paddingVertical="@dimen/default_padding">
+        android:onClick="@{() -> listener.onClick(election)}"
+        android:paddingHorizontal="@dimen/default_padding"
+        android:paddingVertical="@dimen/default_margin">
 
         <TextView
             android:id="@+id/text_name"

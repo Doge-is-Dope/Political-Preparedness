@@ -23,12 +23,12 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.5" />
 
-        <!-- TODO: Add Upcoming Election Recycler and Header -->
         <TextView
             android:id="@+id/text_header_upcoming"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
             android:text="@string/header_upcoming"
             android:textAppearance="@style/TextAppearance.Header"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,27 +39,32 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/default_margin"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:padding="@dimen/default_padding"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_header_upcoming" />
+            app:layout_constraintTop_toBottomOf="@id/text_header_upcoming"
+            app:listData="@{electionsViewModel.upcomingElections}" />
 
-        <ProgressBar
-            android:id="@+id/progress_upcoming"
+        <ImageView
+            android:id="@+id/image_upcoming_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@id/recycler_upcoming"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:civicsApiStatus="@{electionsViewModel.apiStatus}"
             app:layout_constraintTop_toTopOf="@id/recycler_upcoming" />
-
-        <!-- TODO: Add Saved Election Recycler and Header -->
 
         <TextView
             android:id="@+id/text_header_saved"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
             android:text="@string/header_saved"
             android:textAppearance="@style/TextAppearance.Header"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,13 +75,17 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/default_margin"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:padding="@dimen/default_padding"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_header_saved" />
 
-        <ProgressBar
-            android:id="@+id/progress_saved"
+        <ImageView
+            android:id="@+id/image_saved_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@id/recycler_saved"
