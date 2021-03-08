@@ -16,6 +16,11 @@ It leverages the following components from the Jetpack library:
 - [Data Binding](https://developer.android.com/topic/libraries/data-binding/) with binding adapters
 - [Navigation](https://developer.android.com/topic/libraries/architecture/navigation/) with the SafeArgs plugin for parameter passing between fragments
 
+### Get started
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/) to create a project and generate an Civics API Key
+2. Paste the API Key in CivicsHttpClient
+
 ## Report Issues
 
 Notice any issues with a repository? Please file a github issue in the repository.
